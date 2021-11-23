@@ -1,4 +1,5 @@
 ﻿using Game.Ball;
+using Game.GameTimer;
 using Game.Level;
 using Game.Utils;
 using System.Collections.Generic;
@@ -25,6 +26,8 @@ namespace Game
             var levelController = new LevelController(gameModel, Settings, screenBounds);
             _updates.Add(levelController);
 
+            var gameTimeController = new GameTimerController(gameModel);
+            _updates.Add(gameTimeController);
 
             gameModel.State.Value = Settings.InitialState;
         }

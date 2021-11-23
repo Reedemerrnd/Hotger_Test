@@ -11,8 +11,8 @@ namespace Game
         [field: SerializeField] public float BaseVerticalSpeed { get; private set; }
         [field: SerializeField] public float BaseHorizontalSpeed { get; private set; }
         [field: SerializeField] public float SpeedIncreaseDelay { get; private set; }
+        [field: SerializeField] public float SpeedIncreaseRate { get; private set; }
         [field: SerializeField] public Vector3 BallSpawnPosition { get; private set; }
-
 
         [field: Header("Difficulty speed modifiers")]
         [field: SerializeField] public float EasyModifier { get; private set; }
