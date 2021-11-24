@@ -12,11 +12,13 @@ namespace Game.UI
         private MainMenuUIView _mainMenu;
         private GameOverUIView _gameOverMenu;
 
+
         public UIController(GameModel gameModel, ILoadResources resourceLoader, IReadOnlyStatistics gameStats) : base(gameModel)
         {
             _resourceLoader = resourceLoader;
             _gameStats = gameStats;
         }
+
 
         public void DoUpdate()
         {
