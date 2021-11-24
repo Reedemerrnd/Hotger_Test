@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Game.UI
 {
-    internal class InGameUIView : MonoBehaviour
+    internal class InGameUIView : BaseUIView
     {
         [SerializeField] private HoldButtonHandler _upButton;
 
-        public bool ButtonHeld => _upButton.IsHold;
+        public bool ButtonHold => _upButton.IsHold;
     }
 }
 

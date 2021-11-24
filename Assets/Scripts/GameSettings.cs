@@ -3,25 +3,35 @@
 namespace Game
 {
     [CreateAssetMenu(menuName = "Game/Settings")]
-    internal class GameSettings : ScriptableObject, IPrefabContainer
+    internal class GameSettings : ScriptableObject
     {
-        [field: Header ("Settings")]
-        [field: SerializeField] public GameState InitialState { get; private set; }
 
-        [field: SerializeField] public float BaseVerticalSpeed { get; private set; }
-        [field: SerializeField] public float BaseHorizontalSpeed { get; private set; }
-        [field: SerializeField] public float SpeedIncreaseDelay { get; private set; }
-        [field: SerializeField] public float SpeedIncreaseRate { get; private set; }
-        [field: SerializeField] public Vector3 BallSpawnPosition { get; private set; }
+        [Header("Settings")]
+        [SerializeField] private GameState _initialState;
+        [SerializeField] private float _baseVerticalSpeed;
+        [SerializeField] private float _baseHorizontalSpeed;
+        [SerializeField] private float _speedIncreaseDelay;
+        [SerializeField, Range(1.1f, 2f)] private float _speedIncreaseRate;
+        [SerializeField] private Vector3 _ballSpawnPosition;
 
-        [field: Header("Difficulty speed modifiers")]
-        [field: SerializeField] public float EasyModifier { get; private set; }
-        [field: SerializeField] public float MediumModifier { get; private set; }
-        [field: SerializeField] public float HardModifier { get; private set; }
+        [Header("Difficulty speed modifiers")]
+        [SerializeField, Range(0.3f, 0.8f)] private float _easyModifier;
+        [SerializeField, Range (0.8f, 1.3f)] private float _mediumModifier;
+        [SerializeField, Range(1.3f, 1.8f)] private float _hardModifier;
 
-        [field: Header("Prefabs")]
-        [field: SerializeField] public GameObject BallPrefab { get; private set; }
-        [field: SerializeField] public GameObject LevelPrefab { get; private set; }
+
+        public GameState InitialState => _initialState;
+        public float BaseVerticalSpeed => _baseVerticalSpeed;
+        public float BaseHorizontalSpeed => _baseHorizontalSpeed;
+        public float SpeedIncreaseDelay => _speedIncreaseDelay;
+        public float SpeedIncreaseRate => _speedIncreaseRate;
+        public Vector3 BallSpawnPosition => _ballSpawnPosition;
+
+
+
+        public float EasyModifier => _easyModifier;
+        public float MediumModifier => _mediumModifier;
+        public float HardModifier => _hardModifier;
     }
 
 }
