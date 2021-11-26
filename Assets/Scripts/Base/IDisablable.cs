@@ -1,6 +1,6 @@
 ﻿namespace BallGame
 {
-    internal interface IObjectView
+    internal interface IDisablable
     {
         void Disable();
         void Enable();

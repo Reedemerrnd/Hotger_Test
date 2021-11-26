@@ -1,24 +1,25 @@
 ﻿using UnityEngine;
 
-namespace Game.GameTimer
+namespace BallGame.Game.Times
 {
-    internal sealed class GameTimerController : BaseController, IDoUpdate
+    internal sealed class GameTimerController : BaseController
     {
         private float _lastSpeedIncreaseTime;
-        private bool _isEnabled;
+        private readonly GameModel _gameModel;
+        private readonly UpdateManager _updateManager;
 
-        public GameTimerController(GameModel gameModel) : base(gameModel)
+        public GameTimerController(GameModel gameModel, UpdateManager updateManager)
         {
-            gameModel.CurrentRunTime = 0f;
-            _lastSpeedIncreaseTime = 0f;
+            _gameModel = gameModel;
+            _updateManager = updateManager;
+
+            OnEnable();
         }
 
-        public void DoUpdate()
+        private void ResetTimers()
         {
-            if (_isEnabled)
-            {
-                CountTimer();
-            }
+            _gameModel.CurrentRunTime = 0f;
+            _lastSpeedIncreaseTime = 0f;
         }
 
         private void CountTimer()
@@ -33,16 +34,12 @@ namespace Game.GameTimer
             _gameModel.CurrentRunTime = currentTime;
         }
 
-        protected override void OnGameOver()
+        protected override void OnEnable()
         {
-            _isEnabled = false;
-
+            ResetTimers();
+            _updateManager.SubscribeOnUpdate(CountTimer);
         }
 
-        protected override void OnGameStarted()
-        {
-            _gameModel.CurrentRunTime = 0f;
-            _isEnabled = true;
-        }
+        protected override void OnDisable() => _updateManager.UnSubscribeOnUpdate(CountTimer);
     }
 }

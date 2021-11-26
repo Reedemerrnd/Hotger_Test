@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Utils
+namespace BallGame.Utils.Screen
 {
     internal class ScreenBounds
     {

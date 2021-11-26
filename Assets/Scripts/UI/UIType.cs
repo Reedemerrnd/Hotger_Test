@@ -1,4 +1,4 @@
-﻿namespace Game.UI
+﻿namespace BallGame.UI
 {
     internal enum UIType
     {

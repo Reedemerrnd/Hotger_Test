@@ -1,14 +1,13 @@
-﻿using Game.Ball;
-using Game.Level;
-using Game.UI;
-using UnityEngine;
+﻿using BallGame.Game.Ball;
+using BallGame.Game.Level;
+using BallGame.UI;
 
-namespace Game.ResourcesLoader
+namespace BallGame.Utils.ResourceLoad
 {
     internal interface ILoadResources
     {
-        IBallView GetBallView(Vector3 position);
-        ILevelView GetLevelVIew();
-        BaseUIView GetUIView(UIType uIType);
-    } 
+        BallView LoadBallView();
+        LevelView LoadLevelView();
+        BaseView LoadUIView(UIType uIType);
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace Game
+﻿namespace BallGame
 {
     internal interface IMovingView
     {

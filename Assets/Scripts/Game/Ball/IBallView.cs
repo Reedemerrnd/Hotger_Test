@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.Ball
+namespace BallGame.Game.Ball
 {
     internal interface IBallView : IMovingView, IObjectView
     {

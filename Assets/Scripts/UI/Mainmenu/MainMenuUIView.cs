@@ -2,9 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.UI
+namespace BallGame.UI
 {
-    internal sealed class MainMenuUIView : BaseUIView
+    internal sealed class MainMenuUIView : BaseView
     {
         [SerializeField] private Toggle _easyToggle;
         [SerializeField] private Toggle _mediumToggle;

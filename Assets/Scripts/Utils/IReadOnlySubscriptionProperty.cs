@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Game.Utils
+namespace BallGame
 {
     internal interface IReadOnlySubscriptionProperty<T>
     {

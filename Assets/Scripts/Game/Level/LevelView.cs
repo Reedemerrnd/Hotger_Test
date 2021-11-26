@@ -1,21 +1,33 @@
-﻿using Game.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Tilemaps;
 
-namespace Game.Level
+namespace BallGame.Game.Level
 {
-    internal class LevelView : MonoBehaviour, ILevelView
+    internal class LevelView : BaseView, ILevelView
     {
 
         [SerializeField] private Transform[] _tiles;
-
         private float _leftXOffset;
         private float _rightXOffset;
 
-        public void Construct(ScreenBounds screenBounds)
+
+
+        public void Construct(float XToDespawn, float XToSpawn)
         {
-            _leftXOffset = screenBounds.BottomLeft.x - screenBounds.Width / 2;
-            _rightXOffset = screenBounds.TopRight.x + screenBounds.Width / 2;
+            _leftXOffset = XToDespawn;
+            _rightXOffset = XToSpawn;
+        }
+
+        public (float YTop, float YBottom) GetCorridorBounds()
+        {
+            if(_tiles != null)
+            {
+                if (_tiles[0].TryGetComponent<Tilemap>(out var tilemap))
+                {
+                    return (tilemap.localBounds.max.y, tilemap.localBounds.min.y);
+                }
+            }
+            return (0f, 0f);
         }
 
         private void MoveTile(Transform tile, float speed)
@@ -36,9 +48,6 @@ namespace Game.Level
                 MoveTile(tile, speed);
             }
         }
-
-        public void Disable() => gameObject.SetActive(false);
-        public void Enable() => gameObject.SetActive(true);
-    } 
+    }
 }
 

@@ -1,7 +1,6 @@
-﻿using Game.Utils;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game
+namespace BallGame
 {
     internal class GameModel
     {
@@ -13,7 +12,7 @@ namespace Game
         private float _hardModifier;
         private GameDifficulty _selectedDifficulty;
 
-        public SubscriptionProperty<GameState> State => _state;
+        public IReadOnlySubscriptionProperty<GameState> State => _state;
         public float HorizontalSpeed { get; private set; }
         public float VerticalSpeed { get; set; }
         public float SpeedIncreaseDelay { get; private set; }
@@ -37,6 +36,10 @@ namespace Game
             _hardModifier = gameSettings.HardModifier;
         }
 
+        public void SetState(GameState gameState)
+        {
+            _state.Value = gameState;
+        }
 
         private void SetDifficulty(GameDifficulty difficulty)
         {

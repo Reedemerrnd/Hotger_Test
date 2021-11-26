@@ -406,7 +406,7 @@ GameObject:
   - component: {fileID: 3483632010725388636}
   - component: {fileID: 3483632010725388637}
   - component: {fileID: 3483632010725388638}
-  - component: {fileID: 3483632010725388626}
+  - component: {fileID: 3468980590559999661}
   m_Layer: 5
   m_Name: GameOverMenu
   m_TagString: Untagged
@@ -498,7 +498,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3483632010725388626
+--- !u!114 &3468980590559999661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -507,7 +507,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3483632010725388639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db5d5a3613999664186bf8b248ef059f, type: 3}
+  m_Script: {fileID: 11500000, guid: c2062e93f3e233e4f899ffe54a569a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _restartButton: {fileID: 3483632009498428726}

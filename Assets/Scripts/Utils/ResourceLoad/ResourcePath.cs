@@ -1,7 +1,7 @@
-﻿using Game.UI;
+﻿using BallGame.UI;
 using System.Collections.Generic;
 
-namespace Game.ResourcesLoader
+namespace BallGame.Utils.ResourceLoad
 {
     internal static class ResourcePath
     {

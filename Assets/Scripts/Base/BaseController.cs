@@ -1,44 +1,52 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
-namespace Game
+namespace BallGame
 {
-    internal abstract class BaseController : IDisposable
+    internal abstract class BaseController : IDisablable
     {
-        protected readonly GameModel _gameModel;
+        private List<IDisablable> _disablalbles;
 
-        public BaseController(GameModel gameModel)
+        private void EnableObjects()
         {
-            _gameModel = gameModel;
-            _gameModel.State.SubscribeOnChange(GameStateHandler);
+            if (_disablalbles == null)
+                return;
+
+            foreach (IDisablable disablable in _disablalbles)
+                disablable.Enable();
         }
-        protected virtual void OnGameOver() { }
-        protected virtual void OnGameStarted() { }
-        protected virtual void OnMenuOpen() { }
-        protected virtual void OnDefault() { }
 
-
-        private void GameStateHandler(GameState state)
+        private void DisableObjects()
         {
-            switch (state)
+            if (_disablalbles == null)
+                return;
+
+            foreach (IDisablable disablable in _disablalbles)
+                disablable.Disable();
+        }
+
+        protected void AddDisablable(IDisablable disablebleObj)
+        {
+            if(_disablalbles == null)
             {
-                case GameState.None:
-                    OnDefault();
-                    break;
-                case GameState.MainMenu:
-                    OnMenuOpen();
-                    break;
-                case GameState.Game:
-                    OnGameStarted();
-                    break;
-                case GameState.GameOver:
-                    OnGameOver();
-                    break;
-                default:
-                    OnDefault();
-                    break;
+                _disablalbles = new List<IDisablable>();
             }
+            _disablalbles.Add(disablebleObj);
         }
 
-        public virtual void Dispose() => _gameModel.State.UnSubscribeOnChange(GameStateHandler);
+        public void Disable()
+        {
+            OnDisable();
+            DisableObjects();
+        }
+
+        protected virtual void OnDisable() { }
+
+        public void Enable()
+        {
+            OnEnable();
+            EnableObjects();
+        }
+
+        protected virtual void OnEnable() { }
     }
 }

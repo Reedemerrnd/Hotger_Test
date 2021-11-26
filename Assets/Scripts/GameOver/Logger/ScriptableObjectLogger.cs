@@ -1,4 +1,4 @@
-﻿namespace Game.Statistic
+﻿namespace BallGame.Statistic
 {
     internal class ScriptableObjectLogger : ILogger
     {

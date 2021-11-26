@@ -2,9 +2,9 @@
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace Game.UI
+namespace BallGame.UI
 {
-    internal sealed class GameOverUIView : BaseUIView
+    internal sealed class GameOverUIView : BaseView
     {
         [SerializeField] private Button _restartButton;
         [SerializeField] private Button _setDifficultyButton;

@@ -1,48 +1,39 @@
-﻿using Game.ResourcesLoader;
-using Game.Utils;
+﻿using BallGame.Utils.Screen;
 
-namespace Game.Level
+namespace BallGame.Game.Level
 {
-    internal sealed class LevelController : BaseController, IDoUpdate
+    internal sealed class LevelController : BaseController
     {
-        private readonly ILoadResources _resourceLoader;
+        private readonly GameModel _gameModel;
         private readonly ScreenBounds _screenBounds;
+        private readonly ILevelView _levelView;
+        private readonly UpdateManager _updateManager;
 
-        private ILevelView _levelView;
 
-
-        public LevelController(GameModel gameModel,ILoadResources resourceLoader, ScreenBounds screenBounds) : base(gameModel)
+        public LevelController(GameModel gameModel, ScreenBounds screenBounds, ILevelView levelView, UpdateManager updateManager)
         {
-            _resourceLoader = resourceLoader;
+            _gameModel = gameModel;
             _screenBounds = screenBounds;
+            _levelView = levelView;
+            _updateManager = updateManager;
+
+            var xOffsets = CalculateOffset();
+            _levelView.Construct(xOffsets.xLeft, xOffsets.xRight);
+
+            OnEnable();
         }
-        
-        
-        public void DoUpdate() => _levelView?.Move(_gameModel.HorizontalSpeed);
 
-
-        protected override void OnGameStarted()
+        private (float xLeft, float xRight) CalculateOffset()
         {
-            LoadLevel();
+            var halfWidth = _screenBounds.Width / 2f;
+            float xLeft = _screenBounds.BottomLeft.x - halfWidth;
+            float xRight = _screenBounds.TopRight.x + halfWidth;
+            return (xLeft, xRight);
         }
 
-        private void LoadLevel()
-        {
-            if (_levelView == null)
-            {
-                _levelView = _resourceLoader.GetLevelVIew();
-                _levelView.Construct(_screenBounds);
-            }
-            else
-            {
-                _levelView.Enable();
-            }
+        public void MoveLevel() => _levelView?.Move(_gameModel.HorizontalSpeed);
 
-        }
-
-        protected override void OnGameOver()
-        {
-            _levelView.Disable();
-        }
+        protected override void OnDisable() => _updateManager.UnSubscribeOnUpdate(MoveLevel);
+        protected override void OnEnable() => _updateManager.SubscribeOnUpdate(MoveLevel);
     }
 }

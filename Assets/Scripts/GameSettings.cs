@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game
+namespace BallGame
 {
     [CreateAssetMenu(menuName = "Game/Settings")]
     internal class GameSettings : ScriptableObject

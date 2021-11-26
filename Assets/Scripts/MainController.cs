@@ -1,54 +1,92 @@
-﻿using Game.Ball;
-using Game.GameTimer;
-using Game.Level;
-using Game.ResourcesLoader;
-using Game.Utils;
-using Game.UI;
-using System.Collections.Generic;
-using UnityEngine;
-using Game.Statistic;
+﻿using BallGame.Game;
+using BallGame.GameOver;
+using BallGame.Statistic;
+using BallGame.UI;
+using BallGame.Utils.ResourceLoad;
+using BallGame.Utils.Screen;
 
-namespace Game
+namespace BallGame
 {
-    internal class MainController : MonoBehaviour
+    internal sealed class MainController : BaseController
     {
-        private List<IDoUpdate> _updates;
+        private readonly GameModel _gameModel;
+        private readonly UpdateManager _updateManager;
+        private readonly ScreenBounds _screenBounds;
+        private GameController _gameController;
+        private ResourceLoader _resourceLoader;
+        private Factory _factory;
+        private GameStatictics _statisticFile;
+        private GameOverController _gameOverController;
+        private MainMenuController _mainMenuController;
 
-        [field: SerializeField] public GameSettings Settings { get; private set; }
-
-
-        private void Awake()
+        public MainController(GameModel gameModel, UpdateManager updateManager)
         {
-            _updates = new List<IDoUpdate>();
-            var gameModel = new GameModel(Settings);
-            var screenBounds = new ScreenBounds();
-            var resourceLoader = new ResourceLoader();
+            _gameModel = gameModel;
+            _updateManager = updateManager;
 
-            var statisticFile = resourceLoader.GetStatisticFile();
-            var logger = new ScriptableObjectLogger(statisticFile);
-            var statsCintroller = new StatisticController(gameModel, logger);
+            _screenBounds = new ScreenBounds();
+            _resourceLoader = new ResourceLoader();
+            _factory = new Factory(_resourceLoader);
 
-            var ballController = new BallController(gameModel, resourceLoader);
-            _updates.Add(ballController);
+            _statisticFile = _resourceLoader.LoadStatsFile();
 
-            var levelController = new LevelController(gameModel,resourceLoader, screenBounds);
-            _updates.Add(levelController);
-
-            var gameTimeController = new GameTimerController(gameModel);
-            _updates.Add(gameTimeController);
-
-            var UIController = new UIController(gameModel, resourceLoader, statisticFile);
-            _updates.Add(UIController);
-
-            gameModel.State.Value = Settings.InitialState;
+            _gameModel.State.SubscribeOnChange(HandleGameState);
         }
 
-        private void Update()
+        private void HandleGameState(GameState gameState)
         {
-            foreach (var controller in _updates)
+            DisableControllers();
+            switch (gameState)
             {
-                controller.DoUpdate();
+                case GameState.MainMenu:
+                    EnableMainMenuController();
+                    break;
+                case GameState.Game:
+                    EnableGameController();
+                    break;
+                case GameState.GameOver:
+                    EnableGameOverController();
+                    break;
+                default:
+                    break;
             }
+        }
+
+        private void EnableMainMenuController()
+        {
+            if (_mainMenuController == null)
+            {
+                _mainMenuController = new MainMenuController(_gameModel, _factory);
+                AddDisablable(_mainMenuController);
+            }
+            _mainMenuController.Enable();
+        }
+
+        private void EnableGameController()
+        {
+            if (_gameController == null)
+            {
+                _gameController = new GameController(_gameModel, _factory, _updateManager, _screenBounds);
+                AddDisablable(_gameController); 
+            }
+            _gameController.Enable();
+        }
+
+        private void EnableGameOverController()
+        {
+            if (_gameOverController == null)
+            {
+                _gameOverController = new GameOverController(_gameModel, _factory, _statisticFile);
+                AddDisablable(_gameOverController); 
+            }
+            _gameOverController.Enable();
+        }
+
+        private void DisableControllers()
+        {
+            _mainMenuController?.Disable();
+            _gameController?.Disable();
+            _gameOverController?.Disable();
         }
     }
 }

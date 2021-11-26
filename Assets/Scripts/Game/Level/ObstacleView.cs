@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.Level
+namespace BallGame.Level
 {
     internal class ObstacleView : MonoBehaviour, IMovingView, IObjectView
     {

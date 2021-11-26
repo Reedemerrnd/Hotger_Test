@@ -1,9 +1,8 @@
-﻿using Game.Utils;
-
-namespace Game.Level
+﻿namespace BallGame.Game.Level
 {
     internal interface ILevelView : IMovingView, IObjectView
     {
-        void Construct(ScreenBounds screenBounds);
+        void Construct(float XToDespawn, float XToSpawn);
+        public (float YTop, float YBottom) GetCorridorBounds();
     }
 }
