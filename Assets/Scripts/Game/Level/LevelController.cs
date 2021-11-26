@@ -1,4 +1,5 @@
-﻿using BallGame.Utils.Screen;
+﻿using BallGame.Utils;
+using BallGame.Utils.Screen;
 
 namespace BallGame.Game.Level
 {
