@@ -19,9 +19,11 @@ namespace BallGame.UI
             _setDifficultyButton.onClick.AddListener(setDifficultyHandler);
         }
 
+
         public void DisplayLength(string length) => _lastTryLengthText.text = "Продолжительность попытки: " + length;
 
         public void DisplayTryCount(string count) => _tryCountText.text = "Общее количество попыток: " + count;
+
 
         private void OnDisable()
         {

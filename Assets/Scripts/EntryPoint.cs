@@ -8,6 +8,7 @@ namespace BallGame
         [SerializeField] private GameSettings _gameSettings;
         [SerializeField] private UpdateManager _updateManager;
 
+
         private void Awake()
         {
             var gameModel = new GameModel(_gameSettings);

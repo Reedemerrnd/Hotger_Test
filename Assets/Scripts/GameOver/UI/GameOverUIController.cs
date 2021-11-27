@@ -8,12 +8,14 @@ namespace BallGame.UI
         private readonly GameModel _gameModel;
         private readonly GameOverUIView _gameOverUIView;
 
+
         public GameOverUIController(GameModel gameModel, GameOverUIView gameOverUIView, IReadOnlyStatistics gameStats)
         {
             _gameStats = gameStats;
             _gameModel = gameModel;
             _gameOverUIView = gameOverUIView;
         }
+
 
         protected override void OnEnable()
         {

@@ -8,15 +8,12 @@ namespace BallGame.Game.Ball
     {
         public event Action OnCollision;
 
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            OnCollision?.Invoke();
-        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             OnCollision?.Invoke();
         }
+
 
         public void Move(float speed) => transform.position += Vector3.down * speed * Time.deltaTime;
         public void SetPosition(Vector3 position) => transform.position = position;

@@ -13,8 +13,8 @@ namespace BallGame
         private float _hardModifier;
 
         private GameDifficulty _selectedDifficulty;
-
         public IReadOnlySubscriptionProperty<GameState> State => _state;
+
 
         public float HorizontalSpeed { get; private set; }
         public float VerticalSpeed { get; set; }
@@ -28,6 +28,7 @@ namespace BallGame
         public bool UpButtonHold { get; set; }
 
         public float ObstacleSpawnDelay { get; private set; }
+
 
         public GameModel(GameSettings gameSettings)
         {

@@ -8,45 +8,32 @@ namespace BallGame.Game
 {
     internal sealed class GameController : BaseController
     {
-        private readonly GameModel _gameModel;
-        private readonly Factory _gameFactory;
-        private BallView _ballView;
-
         public GameController(GameModel gameModel, Factory gameFactory, UpdateManager updateManager, ScreenBounds screenBounds)
         {
-            _gameModel = gameModel;
-            _gameFactory = gameFactory;
-            _ballView = _gameFactory.CreateBallView(_gameModel.BallSpawnPosition);
-            AddDisablable(_ballView);
+            var ballView = gameFactory.CreateBallView(gameModel.BallSpawnPosition);
+            AddDisablable(ballView);
 
-            var ballController = new BallController(_gameModel, _ballView, updateManager);
+            var ballController = new BallController(gameModel, ballView, updateManager);
             AddDisablable(ballController);
 
-            var levelView = _gameFactory.CreateLevelView();
+            var levelView = gameFactory.CreateLevelView();
             AddDisablable(levelView);
 
-            var levelController = new LevelController(_gameModel, screenBounds, levelView, updateManager);
+            var levelController = new LevelController(gameModel, screenBounds, levelView, updateManager);
             AddDisablable(levelController);
 
-            var gameTimeController = new GameTimerController(_gameModel, updateManager);
+            var gameTimeController = new GameTimerController(gameModel, updateManager);
             AddDisablable(gameTimeController);
 
-            var inGameUI = _gameFactory.CreateInGameUI();
+            var inGameUI = gameFactory.CreateInGameUI();
             AddDisablable(inGameUI);
 
-            var uiController = new InGameUIController(inGameUI, _gameModel);
+            var uiController = new InGameUIController(inGameUI, gameModel);
             AddDisablable(uiController);
 
-            var obstaclePool = _gameFactory.CreateObstaclePool();
+            var obstaclePool = gameFactory.CreateObstaclePool();
             var obstacleController = new ObstacleController(obstaclePool, gameModel, levelView, screenBounds, updateManager);
             AddDisablable(obstacleController);
-        }
-        
-
-
-        protected override void OnEnable()
-        {
-            _ballView.SetPosition(_gameModel.BallSpawnPosition);
         }
     }
 }

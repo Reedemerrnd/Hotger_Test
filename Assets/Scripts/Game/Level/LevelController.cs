@@ -1,5 +1,4 @@
-﻿using BallGame.Utils;
-using BallGame.Utils.Screen;
+﻿using BallGame.Utils.Screen;
 
 namespace BallGame.Game.Level
 {
@@ -22,6 +21,7 @@ namespace BallGame.Game.Level
             _levelView.Construct(xOffsets.xLeft, xOffsets.xRight);
         }
 
+
         private (float xLeft, float xRight) CalculateOffset()
         {
             var halfWidth = _screenBounds.Width / 2f;
@@ -30,7 +30,9 @@ namespace BallGame.Game.Level
             return (xLeft, xRight);
         }
 
-        public void MoveLevel() => _levelView?.Move(_gameModel.HorizontalSpeed);
+
+        private void MoveLevel() => _levelView?.Move(_gameModel.HorizontalSpeed);
+
 
         protected override void OnDisable() => _updateManager.UnSubscribeOnUpdate(MoveLevel);
         protected override void OnEnable() => _updateManager.SubscribeOnUpdate(MoveLevel);

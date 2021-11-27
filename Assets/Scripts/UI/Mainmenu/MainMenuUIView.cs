@@ -15,6 +15,7 @@ namespace BallGame.UI
 
         public event Action<GameDifficulty> OnGameStart = (d) => { };
 
+
         private void OnEnable()
         {
             _startButton.onClick.AddListener(HandleStartButton);
@@ -25,6 +26,7 @@ namespace BallGame.UI
             OnGameStart = (d) => { };
             _startButton.onClick.RemoveListener(HandleStartButton);
         }
+
 
         private void HandleStartButton()
         {

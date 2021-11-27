@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BallGame.Game.Level
+namespace BallGame
 {
     internal interface INotifyDisable<T>
     {

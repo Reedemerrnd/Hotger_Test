@@ -23,6 +23,7 @@
 
         protected override void OnEnable()
         {
+            _ballView.SetPosition(_gameModel.BallSpawnPosition);
             _updateManager.SubscribeOnUpdate(HandleMovement);
             _ballView.OnCollision += CollisionHandler;
         }

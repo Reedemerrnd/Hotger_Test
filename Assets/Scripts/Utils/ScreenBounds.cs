@@ -2,7 +2,7 @@
 
 namespace BallGame.Utils.Screen
 {
-    internal class ScreenBounds
+    internal sealed class ScreenBounds
     {
         private readonly Vector3 _bottomLeft;
         private readonly Vector3 _topRight;

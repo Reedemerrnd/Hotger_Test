@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace BallGame.Game.Level
+﻿namespace BallGame
 {
     internal interface IPrototype<T>
     {

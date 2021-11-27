@@ -5,6 +5,7 @@
         private readonly InGameUIView _inGameUI;
         private readonly GameModel _gameModel;
 
+
         public InGameUIController(InGameUIView inGameUI, GameModel gameModel)
         {
             _inGameUI = inGameUI;

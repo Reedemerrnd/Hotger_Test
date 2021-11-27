@@ -50,15 +50,18 @@ namespace BallGame.Game
             _xToActivate = _screenBounds.TopRight.x + tilemap.cellSize.x;
         }
 
-
         private void HandleUpdate()
         {
             TrySpawnObstacle();
 
-            foreach (var obstacle in _activeObstacles)
+            for (int i = 0; i < _activeObstacles.Count; i++)
             {
-                obstacle.Move(_gameModel.HorizontalSpeed);
+                _activeObstacles[i].Move(_gameModel.HorizontalSpeed);
             }
+            //foreach (var obstacle in _activeObstacles)
+            //{
+            //    obstacle.Move(_gameModel.HorizontalSpeed);
+            //}
         }
 
         private void TrySpawnObstacle()
@@ -101,6 +104,7 @@ namespace BallGame.Game
 
 
         protected override void OnEnable() => _updateManager.SubscribeOnUpdate(HandleUpdate);
+
         protected override void OnDisable()
         {
             _updateManager.UnSubscribeOnUpdate(HandleUpdate);

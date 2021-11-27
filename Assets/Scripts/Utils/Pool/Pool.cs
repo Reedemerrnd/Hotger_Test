@@ -1,7 +1,4 @@
-﻿using BallGame.Game.Level;
-using System.Collections.Generic;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using System.Collections.Generic;
 
 namespace BallGame.Utils
 {
@@ -17,11 +14,13 @@ namespace BallGame.Utils
             _prefab = prefab;
         }
 
+
         private void ReturnToPool(T gameObject)
         {
             gameObject.OnDeactivation -= ReturnToPool;
             _pool.Push(gameObject);
         }
+
 
         public T GetItem()
         {

@@ -5,11 +5,9 @@ namespace BallGame.Game.Level
 {
     internal class LevelView : BaseView, ILevelView
     {
-
         [SerializeField] private Transform[] _tiles;
         private float _leftXOffset;
         private float _rightXOffset;
-
 
 
         public void Construct(float XToDespawn, float XToSpawn)
@@ -28,6 +26,7 @@ namespace BallGame.Game.Level
             }
             tile.position = position;
         }
+
 
         public void Move(float speed)
         {
@@ -55,7 +54,6 @@ namespace BallGame.Game.Level
             }
             return null;
         }
-
     }
 }
 

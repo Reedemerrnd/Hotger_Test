@@ -8,6 +8,7 @@ namespace BallGame.Game.Times
         private readonly GameModel _gameModel;
         private readonly UpdateManager _updateManager;
 
+
         public GameTimerController(GameModel gameModel, UpdateManager updateManager)
         {
             _gameModel = gameModel;
@@ -15,6 +16,7 @@ namespace BallGame.Game.Times
 
             OnEnable();
         }
+
 
         private void ResetTimers()
         {
@@ -33,6 +35,7 @@ namespace BallGame.Game.Times
             }
             _gameModel.CurrentRunTime = currentTime;
         }
+
 
         protected override void OnEnable()
         {

@@ -11,6 +11,7 @@ namespace BallGame.Game.Level
 
         public event Action<IObstacleView> OnDeactivation;
 
+
         public void Move(float speed)
         {
             transform.position += Vector3.left * speed * Time.deltaTime;
@@ -20,8 +21,11 @@ namespace BallGame.Game.Level
             }
         }
 
+
         public void SetPosition(Vector3 position) => transform.position = position;
         public void SetXBorderToDisable(float X) => _xBorder = X;
+        public IObstacleView Clone() => Object.Instantiate(gameObject).GetComponent<IObstacleView>();
+
 
         public override void Disable()
         {
@@ -29,6 +33,5 @@ namespace BallGame.Game.Level
             base.Disable();
         }
 
-        public IObstacleView Clone() => Object.Instantiate(gameObject).GetComponent<IObstacleView>();
     }
 }
