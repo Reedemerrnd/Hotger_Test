@@ -21,4 +21,4 @@ MonoBehaviour:
   _easyModifier: 0.8
   _mediumModifier: 1
   _hardModifier: 1.4
-  _obstacleSpawnRate: 0
+  _obstacleSpawnDelay: 3

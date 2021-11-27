@@ -1,13 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
+using Object = UnityEngine.Object;
+
 namespace BallGame.Game.Level
 {
     internal class ObstacleView : BaseView, IObstacleView
     {
         private float _xBorder;
 
-        public event Action<INotifyDisable> OnDeactivation;
+        public event Action<IObstacleView> OnDeactivation;
 
         public void Move(float speed)
         {
@@ -26,5 +28,7 @@ namespace BallGame.Game.Level
             OnDeactivation?.Invoke(this);
             base.Disable();
         }
+
+        public IObstacleView Clone() => Object.Instantiate(gameObject).GetComponent<IObstacleView>();
     }
 }

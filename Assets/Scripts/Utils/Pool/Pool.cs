@@ -5,19 +5,19 @@ using Object = UnityEngine.Object;
 
 namespace BallGame.Utils
 {
-    internal sealed class Pool<T> : IPool<T> where T : MonoBehaviour, INotifyDisable
+    internal sealed class Pool<T> : IPool<T> where T : IPrototype<T>, IDisablable, INotifyDisable<T>
     {
         private T _prefab;
-        private Stack<INotifyDisable> _pool;
+        private Stack<T> _pool;
 
 
         public Pool(T prefab)
         {
-            _pool = new Stack<INotifyDisable>();
+            _pool = new Stack<T>();
             _prefab = prefab;
         }
 
-        private void ReturnToPool(INotifyDisable gameObject)
+        private void ReturnToPool(T gameObject)
         {
             gameObject.OnDeactivation -= ReturnToPool;
             _pool.Push(gameObject);
@@ -28,11 +28,11 @@ namespace BallGame.Utils
             T item;
             if (_pool.Count > 0)
             {
-                item = _pool.Pop() as T;
+                item = _pool.Pop();
             }
             else
             {
-                item = Object.Instantiate(_prefab);
+                item = _prefab.Clone();
             }
             item.OnDeactivation += ReturnToPool;
             return item;

@@ -36,7 +36,12 @@ namespace BallGame.Game
 
             var uiController = new InGameUIController(inGameUI, _gameModel);
             AddDisablable(uiController);
+
+            var obstaclePool = _gameFactory.CreateObstaclePool();
+            var obstacleController = new ObstacleController(obstaclePool, gameModel, levelView, screenBounds, updateManager);
+            AddDisablable(obstacleController);
         }
+        
 
 
         protected override void OnEnable()

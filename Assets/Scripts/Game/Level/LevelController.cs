@@ -20,8 +20,6 @@ namespace BallGame.Game.Level
 
             var xOffsets = CalculateOffset();
             _levelView.Construct(xOffsets.xLeft, xOffsets.xRight);
-
-            OnEnable();
         }
 
         private (float xLeft, float xRight) CalculateOffset()

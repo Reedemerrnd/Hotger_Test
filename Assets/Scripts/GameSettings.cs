@@ -20,7 +20,7 @@ namespace BallGame
         [SerializeField, Range(1.3f, 1.8f)] private float _hardModifier;
 
         [Header("Obstacles")]
-        [SerializeField] private float _obstacleSpawnRate;
+        [SerializeField] private float _obstacleSpawnDelay;
 
         public GameState InitialState => _initialState;
         public float BaseVerticalSpeed => _baseVerticalSpeed;
@@ -33,7 +33,7 @@ namespace BallGame
         public float MediumModifier => _mediumModifier;
         public float HardModifier => _hardModifier;
 
-        public float ObstacleSpawnRate => _obstacleSpawnRate;
+        public float ObstacleSpawnDelay => _obstacleSpawnDelay;
     }
 
 }

@@ -18,18 +18,6 @@ namespace BallGame.Game.Level
             _rightXOffset = XToSpawn;
         }
 
-        public (float YTop, float YBottom) GetCorridorBounds()
-        {
-            if(_tiles != null)
-            {
-                if (_tiles[0].TryGetComponent<Tilemap>(out var tilemap))
-                {
-                    return (tilemap.localBounds.max.y, tilemap.localBounds.min.y);
-                }
-            }
-            return (0f, 0f);
-        }
-
         private void MoveTile(Transform tile, float speed)
         {
             var position = tile.position;
@@ -48,6 +36,26 @@ namespace BallGame.Game.Level
                 MoveTile(tile, speed);
             }
         }
+
+        public (float YTop, float YBottom) GetCorridorBounds()
+        {
+            var tilemap = GetTilemap();
+            if(tilemap != null)
+            {
+                return (tilemap.localBounds.max.y, tilemap.localBounds.min.y);
+            }
+            return (0f, 0f);
+        }
+
+        public Tilemap GetTilemap()
+        {
+            if (_tiles[0].TryGetComponent<Tilemap>(out var tilemap))
+            {
+                return tilemap;
+            }
+            return null;
+        }
+
     }
 }
 

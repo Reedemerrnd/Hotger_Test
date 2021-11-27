@@ -9,5 +9,7 @@ namespace BallGame.Utils.ResourceLoad
         BallView LoadBallView();
         LevelView LoadLevelView();
         BaseView LoadUIView(UIType uIType);
+
+        ObstacleView LoadObstacle();
     }
 }

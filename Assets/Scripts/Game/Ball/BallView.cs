@@ -8,6 +8,11 @@ namespace BallGame.Game.Ball
     {
         public event Action OnCollision;
 
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            OnCollision?.Invoke();
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             OnCollision?.Invoke();

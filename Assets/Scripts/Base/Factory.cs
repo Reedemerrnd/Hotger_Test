@@ -2,6 +2,7 @@
 using BallGame.Game.Level;
 using BallGame.Game.UI;
 using BallGame.UI;
+using BallGame.Utils;
 using BallGame.Utils.ResourceLoad;
 using UnityEngine;
 
@@ -49,5 +50,10 @@ namespace BallGame
             return Object.Instantiate(prefab);
         }
 
+        public IPool<IObstacleView> CreateObstaclePool()
+        {
+            var prefab = _resourceLoader.LoadObstacle();
+            return new Pool<IObstacleView>(prefab);
+        }
     }
 }

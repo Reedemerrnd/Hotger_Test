@@ -15,5 +15,7 @@ namespace BallGame.Utils.ResourceLoad
         public BaseView LoadUIView(UIType uIType) => Resources.Load<BaseView>(ResourcePath.UI[uIType]);
 
         public GameStatictics LoadStatsFile() => Resources.Load<GameStatictics>(ResourcePath.StatisticFile);
+
+        public ObstacleView LoadObstacle() => Resources.Load<ObstacleView>(ResourcePath.ObstaclePrefab);
     }
 }
